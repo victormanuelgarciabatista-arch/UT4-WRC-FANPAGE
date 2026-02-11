@@ -1,0 +1,25 @@
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
+
+/* Global Styles */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom, #ffffff 33%, #007cc2 33%, #007cc2 66%, #ffce00 66%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: #333;
+}
+
+h1,
+h2,
+h3 {
+  color: #222;
+}

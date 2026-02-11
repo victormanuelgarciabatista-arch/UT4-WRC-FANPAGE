@@ -1,0 +1,53 @@
+1.-) Inicializar el repositorio: (crea la carpeta oculta .git)
+     git init
+
+2.-) Indicar dónde se encuentra el respositorio remoto
+     git remote add origin url-del-respositorio
+
+3.-) Añadir información del usuario de github
+     git config --global user.email "victormanuelgarciabatista@alumno.ieselrincon.es"
+     git config --global user.name "victormanuelgarciabatista-arch"
+
+-------------------------------------------------------
+
+4.-) Añadir todo al stage
+     git add .
+
+5.-) Crear un nuevo commit
+     git commit -m "asunto"
+
+6.-) Cambiar la rama a main
+     git branch main                (crear la rama main)
+     git branch                     (mostrar las ramas existentes)
+     git checkout main              (cambiar a la rama main)
+
+7.-) subir al respositorio remoto los últimos commits
+     git push origin main
+
+----------------------------------------------------------
+
+8.-) clonar un repositorio en una nueva carpeta vacía
+     git clone url-del-repositorio
+
+9.-) instalar dependencias del proyecto
+     cd carpeta-del-proyectio
+     npm install
+
+----------------------------------------------------------
+
+10.-) Pasar todo al stage 
+      git add .
+
+11.-) Crear commit
+      git commit -m "asunto"
+
+12.-) subir los cambios
+      git push origin main
+
+------------------------------------------------------------
+
+13.-) descargar últimos cambios del respositorio remoto
+      git pull origin main
+
+      Puede ocurrir que haya cambios locales que no se han subido al respositorio. Para descartarlos
+      git stash

@@ -1,0 +1,67 @@
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.hero-section {
+    text-align: center;
+    padding: 4rem 1rem;
+    background-color: #f4f4f4;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    border-bottom: 5px solid #fbce13;
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.featured-section {
+    margin-bottom: 3rem;
+}
+
+.featured-section h2,
+.map-section h2 {
+    text-align: center;
+    color: #333;
+    border-left: 5px solid #fbce13;
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.featured-content {
+    display: flex;
+    justify-content: center;
+}
+
+.featured-content .gallery-item {
+    max-width: 600px;
+}
+
+.map-section {
+    margin-bottom: 4rem;
+}
+
+.map-section p {
+    text-align: center;
+    margin-bottom: 1rem;
+}
