@@ -60,7 +60,7 @@ The project has been enhanced with several new interactive and visual features:
 
 1.  Clone this repository:
     ```bash
-    git clone https://github.com/victormanuelgarciabatista-arch/UT4-WRC-FANPAGE
+    git clone https://github.com/victormanuelgarciabatista-arch/UT4-WRC-FANPAGE.git
     ```
 
 2.  Navigate into the project folder:
