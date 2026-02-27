@@ -28,17 +28,17 @@ function Map() {
                 />
                 <Marker position={position}>
                     <Popup>
-                        Las Palmas de Gran Canaria <br /> Sede del WRC 2026.
+                        Las Palmas de Gran Canaria <br /> WRC 2026 Headquarters.
                     </Popup>
                 </Marker>
-                <Marker position={[27.9956, -15.4190]}> {/* Telde - Timed Stage */}
+                <Marker position={[27.9956, -15.4190]}>
                     <Popup>
-                        Telde - Tramo cronometrado
+                        Telde - Timed Stage
                     </Popup>
                 </Marker>
-                <Marker position={[27.9976, -15.6158]}> {/* Tejeda - Mountain Zone */}
+                <Marker position={[27.9976, -15.6158]}>
                     <Popup>
-                        Tejeda - Zona montañosa
+                        Tejeda - Mountain Zone
                     </Popup>
                 </Marker>
             </MapContainer>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './Contact.css';
 
 import Modal from '../../components/modal/Modal';
+import firebaseService from '../../services/firebase.service';
 
 function Contact() {
     const [formData, setFormData] = useState({
@@ -18,15 +19,28 @@ function Contact() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsModalOpen(true);
-        // Real submission logic would go here
+
+        try {
+            // Save data to Firebase using our service
+            await firebaseService.addContacto(
+                formData.name,
+                formData.email,
+                formData.message
+            );
+
+            // Open success modal if everything goes well
+            setIsModalOpen(true);
+        } catch (error) {
+            console.error("Error sending message:", error);
+            alert("There was an error sending the message. Please try again.");
+        }
     };
 
     const closeModal = () => {
         setIsModalOpen(false);
-        setFormData({ name: '', email: '', message: '' }); // Clear form
+        setFormData({ name: '', email: '', message: '' }); // Clear form data
     };
 
     return (

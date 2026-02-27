@@ -4,6 +4,8 @@ import Footer from "./components/footer/Footer"
 import Home from "./pages/home/Home"
 import Gallery from "./pages/gallery/Gallery"
 import Contact from "./pages/contact/Contact"
+import Privacy from "./pages/legal/Privacy"
+import Terms from "./pages/legal/Terms"
 import "./App.css"
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
             <Route path="*" element={<Home />} />
           </Routes>
         </main>

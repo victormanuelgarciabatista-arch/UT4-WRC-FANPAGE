@@ -1,13 +1,20 @@
 .contact-page {
     padding: 2rem;
     max-width: 900px;
-    margin: 0 auto;
+    margin: 2rem auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    /* Shadow object to separate it from the flag background */
 }
 
 .contact-page h1 {
     text-align: center;
     color: #333;
     margin-bottom: 2rem;
+    border-bottom: 2px solid #fbce13;
+    /* Basic canary yellow touch */
+    padding-bottom: 10px;
 }
 
 .contact-container {
@@ -21,12 +28,17 @@
     padding: 1.5rem;
     border-radius: 8px;
     border-left: 5px solid #fbce13;
+    color: #333;
 }
 
 .contact-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    color: #333;
 }
 
 .form-group {
