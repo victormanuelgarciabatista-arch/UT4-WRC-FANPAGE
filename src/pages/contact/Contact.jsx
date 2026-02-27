@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Contact.css';
 
 import Modal from '../../components/modal/Modal';
@@ -11,6 +11,34 @@ function Contact() {
         message: ''
     });
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [messagesList, setMessagesList] = useState([]);
+
+    const fetchMessages = async () => {
+        try {
+            const snapshot = await firebaseService.getAllContactos();
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+
+                // turn the object into an array to map it later
+                const messagesArray = Object.keys(data).map(key => ({
+                    id: key,
+                    ...data[key]
+                }));
+
+                // show newest messages first
+                setMessagesList(messagesArray.reverse());
+            } else {
+                setMessagesList([]); // no data found
+            }
+        } catch (error) {
+            console.error("Error al obtener los mensajes:", error);
+        }
+    };
+
+    // fetch messages when component loads
+    useEffect(() => {
+        fetchMessages();
+    }, []);
 
     const handleChange = (e) => {
         setFormData({
@@ -29,6 +57,9 @@ function Contact() {
                 formData.email,
                 formData.message
             );
+
+            // update the messages list
+            fetchMessages();
 
             // Open success modal if everything goes well
             setIsModalOpen(true);
@@ -91,6 +122,26 @@ function Contact() {
                     </div>
                     <button type="submit" className="submit-btn">Enviar Mensaje</button>
                 </form>
+            </div>
+
+            {/* User messages section */}
+            <div className="messages-section">
+                <h2>Mensajes de los Aficionados</h2>
+                {messagesList.length === 0 ? (
+                    <p className="no-messages">Aún no hay mensajes. ¡Sé el primero en apoyarnos!</p>
+                ) : (
+                    <div className="messages-grid">
+                        {messagesList.map((msg) => (
+                            <div key={msg.id} className="message-card">
+                                <h3>{msg.nombre}</h3>
+                                <p className="message-date">
+                                    {msg.fecha ? new Date(msg.fecha).toLocaleDateString() : "Fecha desconocida"}
+                                </p>
+                                <p className="message-text">"{msg.mensaje}"</p>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
 
             <Modal

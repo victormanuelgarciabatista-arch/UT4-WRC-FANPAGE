@@ -3,7 +3,7 @@ import 'leaflet/dist/leaflet.css';
 import './Map.css';
 import L from 'leaflet';
 
-// Fix for default marker icon
+// fix I found online for the default marker icon
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
@@ -17,7 +17,7 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 function Map() {
-    const position = [28.1235, -15.4363]; // Las Palmas de Gran Canaria
+    const position = [28.1235, -15.4363]; // Las Palmas center coords
 
     return (
         <div className="map-container">
@@ -28,17 +28,17 @@ function Map() {
                 />
                 <Marker position={position}>
                     <Popup>
-                        Las Palmas de Gran Canaria <br /> WRC 2026 Headquarters.
+                        Las Palmas de Gran Canaria <br /> Sede Principal WRC 2026.
                     </Popup>
                 </Marker>
                 <Marker position={[27.9956, -15.4190]}>
                     <Popup>
-                        Telde - Timed Stage
+                        Telde - Tramo Cronometrado
                     </Popup>
                 </Marker>
                 <Marker position={[27.9976, -15.6158]}>
                     <Popup>
-                        Tejeda - Mountain Zone
+                        Tejeda - Zona de Montaña
                     </Popup>
                 </Marker>
             </MapContainer>

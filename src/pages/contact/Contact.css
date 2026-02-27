@@ -85,4 +85,75 @@
     .contact-form {
         flex: 1;
     }
+
+    .messages-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* User messages section */
+
+.messages-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px dashed #ddd;
+    /* subtle separator */
+}
+
+.messages-section h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.no-messages {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.messages-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* 1 column for mobile by default */
+    gap: 1.5rem;
+}
+
+.message-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border-left: 5px solid #fbce13;
+    /* rally yellow touch */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    /* soft shadow */
+    transition: transform 0.2s ease-in-out;
+    /* simple hover animation */
+}
+
+.message-card:hover {
+    transform: translateY(-5px);
+    /* small jump on hover */
+}
+
+.message-card h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.message-date {
+    font-size: 0.85rem;
+    color: #888;
+    margin: 0.5rem 0;
+}
+
+.message-text {
+    color: #555;
+    line-height: 1.5;
+    margin-top: 1rem;
+    font-style: italic;
 }
