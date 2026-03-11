@@ -39,9 +39,11 @@ The visual style and UI layout of this project were partially inspired by the **
     │   ├── contact/
     │   ├── gallery/
     │   ├── home/
-    │   └── legal/
+    │   ├── legal/
+    │   └── news/
     ├── services/
-    │   └── firebase.service.js
+    │   ├── firebase.service.js
+    │   └── rss.xml
     ├── App.jsx
     ├── App.css
     ├── index.css
@@ -62,6 +64,15 @@ The project has been enhanced with several new interactive and visual features:
 
 - **Interactive Gallery & Hero:**  
   Clicking on the hero title or gallery items reveals additional information.
+
+- **News Section & RSS Feed:**  
+  Integrated a news page featuring interactive expandable images (accordion effect) and a functional RSS feed (`src/services/rss.xml`) accessible from the header logo.
+
+- **CRUD Operations:**  
+  Full CRUD (Create, Read, Update, Delete) functionality has been implemented to manage application data directly from the interface.
+
+- **Educational & Clean Codebase:**  
+  Refactored CSS replacing hex values with native standard named colors (e.g., `gold`, `dimgray`). Simplified and cleaned up comments to an A2 English level, ensuring a clear and highly educational environment suitable for a first-year Web Development (DAW) student.
 
 ## ✅ How to Use / View the Project
 

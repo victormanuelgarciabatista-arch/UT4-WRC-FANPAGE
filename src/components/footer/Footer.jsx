@@ -1,3 +1,4 @@
+// Footer component for the bottom of the page
 import { Link } from 'react-router-dom';
 import './Footer.css';
 

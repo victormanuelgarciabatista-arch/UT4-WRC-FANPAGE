@@ -1,9 +1,10 @@
+// We import the map components from react-leaflet
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import './Map.css';
 import L from 'leaflet';
 
-// fix I found online for the default marker icon
+// Fix to load default icons
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
@@ -16,10 +17,12 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
+// This is the main map component
 function Map() {
-    const position = [28.1235, -15.4363]; // Las Palmas center coords
+    const position = [28.1235, -15.4363]; // Center of Las Palmas
 
     return (
+        // Here we return the map view
         <div className="map-container">
             <MapContainer center={position} zoom={10} scrollWheelZoom={false} className="leaflet-map">
                 <TileLayer

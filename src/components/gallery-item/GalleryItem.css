@@ -1,5 +1,5 @@
 .gallery-item {
-    border: 1px solid #ddd;
+    border: 1px solid lightgray;
     border-radius: 8px;
     overflow: hidden;
     background-color: white;
@@ -16,7 +16,7 @@
     height: auto;
     max-height: 400px;
     object-fit: contain;
-    background-color: #f0f0f0;
+    background-color: whitesmoke;
 }
 
 .gallery-content {
@@ -25,11 +25,11 @@
 
 .gallery-title {
     margin: 0 0 10px 0;
-    color: #333;
+    color: dimgray;
 }
 
 .gallery-description {
     margin: 0;
-    color: #666;
+    color: gray;
     font-size: 0.9em;
 }

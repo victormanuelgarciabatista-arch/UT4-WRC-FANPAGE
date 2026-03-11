@@ -1,7 +1,9 @@
+// Component to show one single car card
 import { useState } from 'react';
 import './GalleryItem.css';
 
 function GalleryItem({ image, title, description }) {
+  // State to show or hide the text
   const [showDescription, setShowDescription] = useState(false);
 
   return (

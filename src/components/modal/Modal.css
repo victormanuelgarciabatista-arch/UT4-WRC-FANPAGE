@@ -39,7 +39,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
-    border-bottom: 2px solid #fbce13;
+    border-bottom: 2px solid gold;
     /* Rally Yellow */
     padding-bottom: 10px;
 }
@@ -47,7 +47,7 @@
 .modal-header h2 {
     margin: 0;
     font-size: 1.5rem;
-    color: #333;
+    color: dimgray;
 }
 
 .modal-close {
@@ -55,17 +55,17 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #666;
+    color: gray;
 }
 
 .modal-close:hover {
-    color: #333;
+    color: dimgray;
 }
 
 .modal-body {
     margin-bottom: 20px;
     font-size: 1.1rem;
-    color: #555;
+    color: gray;
     line-height: 1.5;
 }
 
@@ -75,8 +75,8 @@
 }
 
 .modal-btn {
-    background-color: #fbce13;
-    color: #333;
+    background-color: gold;
+    color: dimgray;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
@@ -86,5 +86,5 @@
 }
 
 .modal-btn:hover {
-    background-color: #e5bc10;
+    background-color: goldenrod;
 }

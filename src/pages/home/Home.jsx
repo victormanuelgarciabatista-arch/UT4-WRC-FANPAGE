@@ -1,3 +1,4 @@
+// Main page of the WRC Web
 import Map from '../../components/map/Map';
 import GalleryItem from '../../components/gallery-item/GalleryItem';
 import './Home.css';
@@ -5,8 +6,10 @@ import './Home.css';
 import { useState } from 'react';
 
 function Home() {
+    // State to show or hide the secret text
     const [showDescription, setShowDescription] = useState(false);
 
+    // Data for the main featured card
     const featuredItem = {
         title: "El Rally más espectacular",
         description: "Disfruta de la emoción del asfalto en el corazón de las Islas Canarias. El WRC llega en 2026 para hacer historia.",
@@ -41,6 +44,7 @@ function Home() {
 
             <section className="map-section">
                 <h2>Mapa del Evento</h2>
+                {/* We call the Map component here */}
                 <Map />
             </section>
         </div>

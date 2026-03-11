@@ -1,5 +1,5 @@
 .footer-container {
-    background-color: #333;
+    background-color: dimgray;
     color: white;
     padding: 2rem 1rem;
     margin-top: auto;
@@ -20,8 +20,8 @@
 }
 
 .footer-content a {
-    color: #fbce13;
-    /* Color Rally */
+    color: gold;
+    /* Rally color */
     text-decoration: none;
 }
 

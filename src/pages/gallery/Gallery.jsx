@@ -1,8 +1,10 @@
+// Gallery page to show the Rally cars
 import { useState } from 'react';
 import GalleryItem from '../../components/gallery-item/GalleryItem';
 import './Gallery.css';
 
 function Gallery() {
+    // We save the cars in a state array
     const [items] = useState([
         {
             id: 1,
@@ -29,6 +31,7 @@ function Gallery() {
         <div className="gallery-page">
             <h1>Galería WRC Canarias 2026</h1>
             <div className="gallery-grid">
+                {/* We use map to show each car component */}
                 {items.map(item => (
                     <GalleryItem
                         key={item.id}

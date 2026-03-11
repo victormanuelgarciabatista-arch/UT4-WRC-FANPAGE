@@ -4,7 +4,7 @@ import './Contact.css';
 import Modal from '../../components/modal/Modal';
 import firebaseService from '../../services/firebase.service';
 
-function Contact() {
+const Contact = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -12,6 +12,8 @@ function Contact() {
     });
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [messagesList, setMessagesList] = useState([]);
+    const [editingId, setEditingId] = useState(null);
+    const [deleteModalId, setDeleteModalId] = useState(null);
 
     const fetchMessages = async () => {
         try {
@@ -19,60 +21,121 @@ function Contact() {
             if (snapshot.exists()) {
                 const data = snapshot.val();
 
-                // turn the object into an array to map it later
-                const messagesArray = Object.keys(data).map(key => ({
-                    id: key,
-                    ...data[key]
-                }));
+                // Change object to array to use map()
+                const messagesArray = [];
+                for (const key in data) {
+                    const messageObject = data[key];
+                    messageObject.id = key; // We save the ID
+                    messagesArray.push(messageObject);
+                }
 
-                // show newest messages first
-                setMessagesList(messagesArray.reverse());
+                // Show new messages first
+                const reversedArray = messagesArray.reverse();
+                setMessagesList(reversedArray);
             } else {
-                setMessagesList([]); // no data found
+                setMessagesList([]); // No data
             }
         } catch (error) {
             console.error("Error al obtener los mensajes:", error);
         }
-    };
+    }
 
-    // fetch messages when component loads
+    // Load messages on start
     useEffect(() => {
         fetchMessages();
     }, []);
 
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
+        const inputName = e.target.name;
+        const inputValue = e.target.value;
+
+        // Copy and update state
+        const newFormData = { ...formData };
+        newFormData[inputName] = inputValue;
+
+        setFormData(newFormData);
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            // Save data to Firebase using our service
-            await firebaseService.addContacto(
-                formData.name,
-                formData.email,
-                formData.message
-            );
+            if (editingId !== null) {
+                // Update existing message
+                const updatedData = {
+                    nombre: formData.name,
+                    correo: formData.email,
+                    mensaje: formData.message
+                };
+                await firebaseService.updateContacto(editingId, updatedData);
+            } else {
+                // Save new data to Firebase
+                await firebaseService.addContacto(
+                    formData.name,
+                    formData.email,
+                    formData.message
+                );
+            }
 
-            // update the messages list
+            // Refresh message list
             fetchMessages();
 
-            // Open success modal if everything goes well
+            // Clear edit state
+            setEditingId(null);
+
+            // Open success modal if okay
             setIsModalOpen(true);
         } catch (error) {
-            console.error("Error sending message:", error);
-            alert("There was an error sending the message. Please try again.");
+            console.error("Error saving message:", error);
+            alert("There was an error saving the message. Please try again.");
         }
-    };
+    }
+
+    const handleEdit = (msg) => {
+        let emailValue = msg.correo;
+        if (!emailValue) {
+            emailValue = '';
+        }
+
+        const newFormData = {
+            name: msg.nombre,
+            email: emailValue,
+            message: msg.mensaje
+        };
+
+        setFormData(newFormData);
+        setEditingId(msg.id);
+
+        // Scroll up to edit form
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    const handleDeleteClick = (id) => {
+        setDeleteModalId(id);
+    }
+
+    const confirmDelete = async () => {
+        if (deleteModalId !== null) {
+            try {
+                await firebaseService.deleteContacto(deleteModalId);
+                setDeleteModalId(null);
+                fetchMessages(); // Refresh list
+            } catch (error) {
+                console.error("Error deleting message:", error);
+                alert("Hubo un error al eliminar el mensaje.");
+            }
+        }
+    }
+
+    const closeDeleteModal = () => {
+        setDeleteModalId(null);
+    }
 
     const closeModal = () => {
         setIsModalOpen(false);
-        setFormData({ name: '', email: '', message: '' }); // Clear form data
-    };
+        setFormData({ name: '', email: '', message: '' }); // Clear form
+        setEditingId(null);
+    }
 
     return (
         <div className="contact-page">
@@ -120,26 +183,44 @@ function Contact() {
                             required
                         ></textarea>
                     </div>
-                    <button type="submit" className="submit-btn">Enviar Mensaje</button>
+                    <button type="submit" className="submit-btn">
+                        {editingId ? 'Actualizar Mensaje' : 'Enviar Mensaje'}
+                    </button>
                 </form>
             </div>
 
             {/* User messages section */}
             <div className="messages-section">
                 <h2>Mensajes de los Aficionados</h2>
-                {messagesList.length === 0 ? (
+
+                {messagesList.length === 0 && (
                     <p className="no-messages">Aún no hay mensajes. ¡Sé el primero en apoyarnos!</p>
-                ) : (
+                )}
+
+                {messagesList.length > 0 && (
                     <div className="messages-grid">
-                        {messagesList.map((msg) => (
-                            <div key={msg.id} className="message-card">
-                                <h3>{msg.nombre}</h3>
-                                <p className="message-date">
-                                    {msg.fecha ? new Date(msg.fecha).toLocaleDateString() : "Fecha desconocida"}
-                                </p>
-                                <p className="message-text">"{msg.mensaje}"</p>
-                            </div>
-                        ))}
+                        {messagesList.map((msg) => {
+                            // Simple date format
+                            let dateString = "Fecha desconocida";
+                            if (msg.fecha) {
+                                const dateObj = new Date(msg.fecha);
+                                dateString = dateObj.toLocaleDateString();
+                            }
+
+                            return (
+                                <div key={msg.id} className="message-card">
+                                    <h3>{msg.nombre}</h3>
+                                    <p className="message-date">
+                                        {dateString}
+                                    </p>
+                                    <p className="message-text">"{msg.mensaje}"</p>
+                                    <div className="message-actions">
+                                        <button onClick={() => handleEdit(msg)} className="edit-btn">Editar</button>
+                                        <button onClick={() => handleDeleteClick(msg.id)} className="delete-btn">Eliminar</button>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
                 )}
             </div>
@@ -147,10 +228,22 @@ function Contact() {
             <Modal
                 isOpen={isModalOpen}
                 onClose={closeModal}
-                title="¡Mensaje Enviado!"
+                title="¡Mensaje Guardado!"
             >
-                <p>Gracias por contactar con <strong>WRC Islas Canarias</strong>.</p>
-                <p>Hemos recibido tu mensaje correctamente. Te responderemos a la mayor brevedad posible.</p>
+                <p>Gracias por apoyar a <strong>WRC Islas Canarias</strong>.</p>
+                <p>Tu mensaje se ha guardado correctamente.</p>
+            </Modal>
+
+            <Modal
+                isOpen={deleteModalId !== null}
+                onClose={closeDeleteModal}
+                title="Eliminar Mensaje"
+            >
+                <p>¿Estás seguro de que quieres eliminar este mensaje?</p>
+                <div style={{ display: 'flex', gap: '10px', marginTop: '20px', justifyContent: 'flex-end' }}>
+                    <button className="edit-btn" onClick={closeDeleteModal}>Cancelar</button>
+                    <button className="delete-btn" onClick={confirmDelete}>Sí, eliminar</button>
+                </div>
             </Modal>
         </div>
     );

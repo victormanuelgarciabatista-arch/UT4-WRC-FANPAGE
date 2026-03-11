@@ -1,6 +1,8 @@
+// Component for the popup window (Modal)
 import './Modal.css';
 
 function Modal({ isOpen, onClose, title, children }) {
+    // Open the modal only if isOpen is true
     if (!isOpen) return null;
 
     return (
