@@ -2,8 +2,6 @@
 import { useState } from 'react';
 import { Link } from "react-router-dom"
 import './Header.css'
-// We import the RSS file URL
-import rssFile from '../../services/rss.xml?url';
 
 function Header() {
     // State to know if menu is open on mobile
@@ -22,7 +20,7 @@ function Header() {
             </div>
 
             <div className="header-actions">
-                <a href={rssFile} target="_blank" rel="noopener noreferrer" className="rss-link">
+                <a href="/rss.xml" target="_blank" rel="noopener noreferrer" className="rss-link">
                     <img src="/rss.png" alt="RSS Feed" className="rss-icon" />
                 </a>
 
