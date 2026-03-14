@@ -29,18 +29,16 @@ const Contact = () => {
                     messagesArray.push(messageObject);
                 }
 
-                // Show new messages first
                 const reversedArray = messagesArray.reverse();
                 setMessagesList(reversedArray);
             } else {
-                setMessagesList([]); // No data
+                setMessagesList([]); 
             }
         } catch (error) {
             console.error("Error al obtener los mensajes:", error);
         }
     }
 
-    // Load messages on start
     useEffect(() => {
         fetchMessages();
     }, []);
@@ -49,7 +47,6 @@ const Contact = () => {
         const inputName = e.target.name;
         const inputValue = e.target.value;
 
-        // Copy and update state
         const newFormData = { ...formData };
         newFormData[inputName] = inputValue;
 
@@ -61,7 +58,6 @@ const Contact = () => {
 
         try {
             if (editingId !== null) {
-                // Update existing message
                 const updatedData = {
                     nombre: formData.name,
                     correo: formData.email,
@@ -69,7 +65,6 @@ const Contact = () => {
                 };
                 await firebaseService.updateContacto(editingId, updatedData);
             } else {
-                // Save new data to Firebase
                 await firebaseService.addContacto(
                     formData.name,
                     formData.email,
@@ -77,13 +72,8 @@ const Contact = () => {
                 );
             }
 
-            // Refresh message list
             fetchMessages();
-
-            // Clear edit state
             setEditingId(null);
-
-            // Open success modal if okay
             setIsModalOpen(true);
         } catch (error) {
             console.error("Error saving message:", error);
@@ -105,8 +95,6 @@ const Contact = () => {
 
         setFormData(newFormData);
         setEditingId(msg.id);
-
-        // Scroll up to edit form
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -119,7 +107,7 @@ const Contact = () => {
             try {
                 await firebaseService.deleteContacto(deleteModalId);
                 setDeleteModalId(null);
-                fetchMessages(); // Refresh list
+                fetchMessages(); 
             } catch (error) {
                 console.error("Error deleting message:", error);
                 alert("Hubo un error al eliminar el mensaje.");
@@ -133,7 +121,7 @@ const Contact = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
-        setFormData({ name: '', email: '', message: '' }); // Clear form
+        setFormData({ name: '', email: '', message: '' }); 
         setEditingId(null);
     }
 
@@ -183,13 +171,12 @@ const Contact = () => {
                             required
                         ></textarea>
                     </div>
-                    <button type="submit" className="submit-btn">
+                    <button type="submit" className="submit-btn" style={{ gridColumn: '1 / -1' }}>
                         {editingId ? 'Actualizar Mensaje' : 'Enviar Mensaje'}
                     </button>
                 </form>
             </div>
 
-            {/* User messages section */}
             <div className="messages-section">
                 <h2>Mensajes de los Aficionados</h2>
 
@@ -200,7 +187,6 @@ const Contact = () => {
                 {messagesList.length > 0 && (
                     <div className="messages-grid">
                         {messagesList.map((msg) => {
-                            // Simple date format
                             let dateString = "Fecha desconocida";
                             if (msg.fecha) {
                                 const dateObj = new Date(msg.fecha);

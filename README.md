@@ -12,6 +12,10 @@ The prototype includes:
 - Basic JavaScript features (e.g., show/hide elements, modal logic).
 - Integration of third-party components (Leaflet Map).
 
+## 🌐 Live Demo
+
+You can view the deployed project live here: **[https://base-de-datos-wrc.web.app](https://base-de-datos-wrc.web.app)**
+
 ## 🎨 Design Inspiration
 
 The visual style and UI layout of this project were partially inspired by the **Official WRC Website** and the colors of the **Canary Islands**, which influenced the use of spacing, color contrast (Yellow/Blue/White), card layouts, and component styling.
@@ -66,13 +70,14 @@ The project has been enhanced with several new interactive and visual features:
   Clicking on the hero title or gallery items reveals additional information.
 
 - **News Section & RSS Feed:**  
-  Integrated a news page featuring interactive expandable images (accordion effect) and a functional RSS feed (`src/services/rss.xml`) accessible from the header logo.
+  Integrated a news page featuring interactive expandable images (accordion effect). The redundant "Leer más" button was removed for a cleaner look. The project now includes a functional RSS feed successfully relocated to `public/rss.xml` and accessible from the header logo.
+
+- **Hosting & Deployment:**  
+  The application has been fully built and deployed to **Firebase Hosting**, making it publicly accessible over the web.
 
 - **CRUD Operations:**  
   Full CRUD (Create, Read, Update, Delete) functionality has been implemented to manage application data directly from the interface.
 
-- **Educational & Clean Codebase:**  
-  Refactored CSS replacing hex values with native standard named colors (e.g., `gold`, `dimgray`). Simplified and cleaned up comments to an A2 English level, ensuring a clear and highly educational environment suitable for a first-year Web Development (DAW) student.
 
 ## ✅ How to Use / View the Project
 
@@ -101,16 +106,18 @@ The project has been enhanced with several new interactive and visual features:
 ## 🙏 Acknowledgements
 
 Special thanks to:
-- The **Chicharreros**, for the nights of help and support.
+
+- my classmates because some still trust me and help me keep going.
 - My teacher **Tiburcio**, for approving my work. 
-- The free resources used in the project (images, icons).
-- My guild **Sorry Lag** for future movements.
+
+
 
 ## 👤 Author
 
 **Víctor Manuel García Batista**  
 GitHub: https://github.com/victormanuelgarciabatista-arch
-
+Url: https://base-de-datos-wrc.web.app/
 ## 📄 License
 
 This project is licensed under the MIT License.
+

@@ -1,12 +1,9 @@
-// News page with images that can get bigger
 import { useState } from 'react';
 import './News.css';
 
 function News() {
-    // State to know which image is clicked
     const [expandedImageId, setExpandedImageId] = useState(null);
 
-    // Array of news objects
     const [newsItems] = useState([
         {
             id: 1,
@@ -44,7 +41,6 @@ function News() {
                             <span className="news-date">{news.date}</span>
                             <h2 className="news-headline">{news.title}</h2>
                             <p className="news-summary">{news.summary}</p>
-                            <button className="news-read-more">Leer más</button>
                         </div>
                     </article>
                 ))}

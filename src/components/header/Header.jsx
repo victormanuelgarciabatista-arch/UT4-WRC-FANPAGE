@@ -1,13 +1,10 @@
-// Header component with navigation menu
 import { useState } from 'react';
 import { Link } from "react-router-dom"
 import './Header.css'
 
 function Header() {
-    // State to know if menu is open on mobile
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    // Function to open or close the menu
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };

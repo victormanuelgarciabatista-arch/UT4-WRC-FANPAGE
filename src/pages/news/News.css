@@ -75,21 +75,6 @@
     flex-grow: 1;
 }
 
-.news-read-more {
-    background-color: gold;
-    color: dimgray;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    align-self: flex-start;
-    transition: background-color 0.3s;
-}
-
-.news-read-more:hover {
-    background-color: goldenrod;
-}
 
 .news-image-clickable {
     cursor: pointer;

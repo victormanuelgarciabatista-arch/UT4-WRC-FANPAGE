@@ -1,4 +1,3 @@
-// Main file that controls the routes of the web
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Header from "./components/header/Header"
 import Footer from "./components/footer/Footer"
@@ -11,7 +10,6 @@ import "./App.css"
 
 function App() {
   return (
-    // React Router to move between pages
     <BrowserRouter>
       <div className="app-layout">
         <Header />
@@ -23,7 +21,6 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/news" element={<News />} />
-            {/* If the URL is wrong, go to home page */}
             <Route path="*" element={<Home />} />
           </Routes>
         </main>
