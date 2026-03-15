@@ -70,7 +70,9 @@ The project has been enhanced with several new interactive and visual features:
   Clicking on the hero title or gallery items reveals additional information.
 
 - **News Section & RSS Feed:**  
-  Integrated a news page featuring interactive expandable images (accordion effect). The redundant "Leer más" button was removed for a cleaner look. The project now includes a functional RSS feed successfully relocated to `public/rss.xml` and accessible from the header logo.
+  Integrated a news page featuring interactive expandable images (accordion effect). The project now includes a functional RSS feed successfully relocated to `public/rss.xml` and accessible from the header logo. This RSS feed is fully compatible with external RSS reading platforms (such as Feeder).
+  
+  ![screenshot feed reader](public/imagenrss.png)
 
 - **Hosting & Deployment:**  
   The application has been fully built and deployed to **Firebase Hosting**, making it publicly accessible over the web.
