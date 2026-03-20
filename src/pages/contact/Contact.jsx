@@ -17,7 +17,7 @@ const Contact = () => {
 
     const fetchMessages = async () => {
         try {
-            const snapshot = await firebaseService.getAllContactos();
+            const snapshot = await firebaseService.getAllContacts();
             if (snapshot.exists()) {
                 const data = snapshot.val();
 
@@ -59,13 +59,13 @@ const Contact = () => {
         try {
             if (editingId !== null) {
                 const updatedData = {
-                    nombre: formData.name,
-                    correo: formData.email,
-                    mensaje: formData.message
+                    name: formData.name,
+                    email: formData.email,
+                    message: formData.message
                 };
-                await firebaseService.updateContacto(editingId, updatedData);
+                await firebaseService.updateContact(editingId, updatedData);
             } else {
-                await firebaseService.addContacto(
+                await firebaseService.addContact(
                     formData.name,
                     formData.email,
                     formData.message
@@ -82,15 +82,15 @@ const Contact = () => {
     }
 
     const handleEdit = (msg) => {
-        let emailValue = msg.correo;
+        let emailValue = msg.email;
         if (!emailValue) {
             emailValue = '';
         }
 
         const newFormData = {
-            name: msg.nombre,
+            name: msg.name,
             email: emailValue,
-            message: msg.mensaje
+            message: msg.message
         };
 
         setFormData(newFormData);
@@ -105,7 +105,7 @@ const Contact = () => {
     const confirmDelete = async () => {
         if (deleteModalId !== null) {
             try {
-                await firebaseService.deleteContacto(deleteModalId);
+                await firebaseService.deleteContact(deleteModalId);
                 setDeleteModalId(null);
                 fetchMessages(); 
             } catch (error) {
@@ -188,18 +188,18 @@ const Contact = () => {
                     <div className="messages-grid">
                         {messagesList.map((msg) => {
                             let dateString = "Fecha desconocida";
-                            if (msg.fecha) {
-                                const dateObj = new Date(msg.fecha);
+                            if (msg.date) {
+                                const dateObj = new Date(msg.date);
                                 dateString = dateObj.toLocaleDateString();
                             }
 
                             return (
                                 <div key={msg.id} className="message-card">
-                                    <h3>{msg.nombre}</h3>
+                                    <h3>{msg.name}</h3>
                                     <p className="message-date">
                                         {dateString}
                                     </p>
-                                    <p className="message-text">"{msg.mensaje}"</p>
+                                    <p className="message-text">"{msg.message}"</p>
                                     <div className="message-actions">
                                         <button onClick={() => handleEdit(msg)} className="edit-btn">Editar</button>
                                         <button onClick={() => handleDeleteClick(msg.id)} className="delete-btn">Eliminar</button>

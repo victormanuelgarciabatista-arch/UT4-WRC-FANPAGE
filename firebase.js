@@ -22,3 +22,9 @@ const analytics = getAnalytics(app);
 
 import { getDatabase } from "firebase/database";
 export const db = getDatabase(app);
+
+import { getAuth } from "firebase/auth";
+export const auth = getAuth(app);
+
+import { getStorage } from "firebase/storage";
+export const storage = getStorage(app);

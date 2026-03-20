@@ -33,7 +33,9 @@ function Header() {
                     <li><Link to="/" onClick={toggleMenu}>Inicio</Link></li>
                     <li><Link to="/news" onClick={toggleMenu}>Noticias</Link></li>
                     <li><Link to="/gallery" onClick={toggleMenu}>Galería</Link></li>
+                    <li><Link to="/stats" onClick={toggleMenu}>Estadísticas</Link></li>
                     <li><Link to="/contact" onClick={toggleMenu}>Contacto</Link></li>
+                    <li><Link to="/login" onClick={toggleMenu} className="admin-link">Admin</Link></li>
                 </ul>
             </nav>
         </header>
