@@ -28,7 +28,8 @@ I used these tools to build the website:
 - [Vite](https://vitejs.dev/)
 - [CSS3](https://developer.mozilla.org/es/docs/Web/CSS) (Flexbox and Grid)
 - [Leaflet](https://leafletjs.com/) and [React-Leaflet](https://react-leaflet.js.org/) for the map on the Contact page.
-- [Firebase Realtime Database](https://firebase.google.com/) to save the contact messages.
+- [Firebase](https://firebase.google.com/) (Realtime Database, Storage, and Authentication).
+- [D3.js](https://d3js.org/) for the beautiful statistics charts.
 
 ## 📚 Help and Tutorials
 
@@ -48,13 +49,18 @@ These websites helped me a lot:
     │   ├── gallery-item/
     │   ├── header/
     │   ├── map/
-    │   └── modal/
+    │   ├── modal/
+    │   ├── protected-route/
+    │   └── stats/
     ├── pages/
+    │   ├── admin/
     │   ├── contact/
     │   ├── gallery/
     │   ├── home/
     │   ├── legal/
-    │   └── news/
+    │   ├── login/
+    │   ├── news/
+    │   └── stats/
     ├── services/
     │   └── firebase.service.js
     ├── App.jsx
@@ -69,6 +75,9 @@ These websites helped me a lot:
 - **News and RSS:** There is a news page. You can read the RSS feed in `public/rss.xml`.
 - **Firebase Hosting:** The website is live on the internet.
 - **Data (CRUD):** You can create, read, update, and delete messages.
+- **Admin Login:** There is a safe login page. Only the admin can enter.
+- **Image Management:** The admin can add and delete images for the gallery. It uses Firebase Storage.
+- **Statistics (Stats):** A new page to see wonderful charts about the rally. I made it with D3.js.
 
 ## ✅ How to start
 
