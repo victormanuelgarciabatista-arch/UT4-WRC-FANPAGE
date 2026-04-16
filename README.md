@@ -82,9 +82,9 @@ These websites helped me a lot:
   - All Firebase connection logic is centralized in the `services` folder. Components do not import from `firebase/auth` anymore.
   - In the Admin Panel, you can **export** your cars to JSON, CSV, and XML directly from the database dynamically. You can also **import** new cars using a `.json` file.
   - Here are the example import/export files to test:
-    - [Download datos.json example](public/datos.json)
-    - [Download datos.csv example](public/datos.csv)
-    - [Download datos.xml example](public/datos.xml)
+    - [Download datos.json example](https://raw.githubusercontent.com/victormanuelgarciabatista-arch/UT4-WRC-FANPAGE/main/public/datos.json)
+    - [Download datos.csv example](https://raw.githubusercontent.com/victormanuelgarciabatista-arch/UT4-WRC-FANPAGE/main/public/datos.csv)
+    - [Download datos.xml example](https://raw.githubusercontent.com/victormanuelgarciabatista-arch/UT4-WRC-FANPAGE/main/public/datos.xml)
 
 ## ✅ How to start
 
