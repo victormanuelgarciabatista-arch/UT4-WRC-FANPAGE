@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../../firebase';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import firebaseService from '../../services/firebase.service';
 import './Login.css';
 
 const Login = () => {
@@ -16,9 +15,9 @@ const Login = () => {
         setError('');
         try {
             if (isRegistering) {
-                await createUserWithEmailAndPassword(auth, email, password);
+                await firebaseService.registerUser(email, password);
             } else {
-                await signInWithEmailAndPassword(auth, email, password);
+                await firebaseService.loginUser(email, password);
             }
             navigate('/admin'); // Assuming admin panel will be at /admin
         } catch (err) {

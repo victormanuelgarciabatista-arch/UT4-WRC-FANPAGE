@@ -78,6 +78,13 @@ These websites helped me a lot:
 - **Admin Login:** There is a safe login page. Only the admin can enter.
 - **Image Management:** The admin can add and delete images for the gallery. It uses Firebase Storage.
 - **Statistics (Stats):** A new page to see wonderful charts about the rally. I made it with D3.js.
+- **Import and Export (Firebase Centralized):** 
+  - All Firebase connection logic is centralized in the `services` folder. Components do not import from `firebase/auth` anymore.
+  - In the Admin Panel, you can **export** your cars to JSON, CSV, and XML directly from the database dynamically. You can also **import** new cars using a `.json` file.
+  - Here are the example import/export files to test:
+    - [Download datos.json example](/datos.json)
+    - [Download datos.csv example](/datos.csv)
+    - [Download datos.xml example](/datos.xml)
 
 ## ✅ How to start
 

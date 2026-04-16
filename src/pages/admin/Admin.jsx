@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { auth } from '../../../firebase';
-import { signOut } from 'firebase/auth';
+
 import firebaseService from '../../services/firebase.service';
 import './Admin.css';
 
@@ -62,17 +61,100 @@ const Admin = () => {
         }
     };
 
+    const downloadFile = (content, filename, type) => {
+        const blob = new Blob([content], { type });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
+    const handleExportJSON = () => {
+        const dataStr = JSON.stringify(cars, null, 2);
+        downloadFile(dataStr, "datos.json", "application/json");
+    };
+
+    const handleExportCSV = () => {
+        if (cars.length === 0) return;
+        const headers = ["id", "title", "description", "image", "date"];
+        const csvRows = [];
+        csvRows.push(headers.join(","));
+        cars.forEach(car => {
+            const values = headers.map(header => {
+                const escaped = ('' + (car[header] || '')).replace(/"/g, '""');
+                return `"${escaped}"`;
+            });
+            csvRows.push(values.join(","));
+        });
+        downloadFile(csvRows.join("\n"), "datos.csv", "text/csv");
+    };
+
+    const handleExportXML = () => {
+        let xmlStr = '<?xml version="1.0" encoding="UTF-8"?>\n<cars>\n';
+        cars.forEach(car => {
+            xmlStr += '  <car>\n';
+            xmlStr += `    <id>${car.id}</id>\n`;
+            xmlStr += `    <title><![CDATA[${car.title || ''}]]></title>\n`;
+            xmlStr += `    <description><![CDATA[${car.description || ''}]]></description>\n`;
+            xmlStr += `    <image><![CDATA[${car.image || ''}]]></image>\n`;
+            xmlStr += `    <date>${car.date || ''}</date>\n`;
+            xmlStr += '  </car>\n';
+        });
+        xmlStr += '</cars>';
+        downloadFile(xmlStr, "datos.xml", "application/xml");
+    };
+
+    const handleImportJSON = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+            try {
+                const importedData = JSON.parse(event.target.result);
+                if (Array.isArray(importedData)) {
+                    for (const car of importedData) {
+                        await firebaseService.addCar(car.title, car.description, car.image);
+                    }
+                    fetchCars();
+                    alert("Importación JSON completada. Los coches se han subido a Firebase.");
+                } else {
+                    alert("El formato del JSON debe ser un array de coches [ {...}, {...} ].");
+                }
+            } catch (error) {
+                console.error("Error importando JSON", error);
+                alert("Error leyendo el archivo JSON. Verifica el formato.");
+            }
+        };
+        reader.readAsText(file);
+    };
+
     return (
         <div className="admin-page">
             <div className="admin-header">
                 <h2>Panel de Control (Admin)</h2>
                 <div className="user-controls">
                     <span>Sesión iniciada como: <strong>{currentUser.email}</strong></span>
-                    <button onClick={() => signOut(auth)} className="logout-btn">Cerrar Sesión</button>
+                    <button onClick={() => firebaseService.logoutUser()} className="logout-btn">Cerrar Sesión</button>
                 </div>
             </div>
 
             <div className="admin-content">
+                <div className="admin-import-export-container">
+                    <h3>Importar y Exportar Datos</h3>
+                    <p>Guarda tus datos localmente o sube nuevos coches desde un fichero JSON.</p>
+                    <div className="export-buttons">
+                        <button onClick={handleExportJSON} className="export-btn">Exportar a JSON</button>
+                        <button onClick={handleExportCSV} className="export-btn">Exportar a CSV</button>
+                        <button onClick={handleExportXML} className="export-btn">Exportar a XML</button>
+                    </div>
+                    <div className="import-section">
+                        <label>Importar datos desde JSON:</label>
+                        <input type="file" accept=".json" onChange={handleImportJSON} className="import-input" />
+                    </div>
+                </div>
+
                 <div className="admin-form-container">
                     <h3>{editingId ? "Editar Coche en Galería" : "Añadir Nuevo Coche"}</h3>
                     <form onSubmit={handleSubmit} className="admin-form">

@@ -1,5 +1,6 @@
-import { db } from "../../firebase";
+import { db, auth } from "../../firebase";
 import { ref, push, get, update, remove } from "firebase/database";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
 const dbRef = ref(db, "/contactos");
 
@@ -53,6 +54,22 @@ const deleteCar = (id) => {
   return remove(itemRef);
 }
 
+const loginUser = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password);
+};
+
+const registerUser = (email, password) => {
+  return createUserWithEmailAndPassword(auth, email, password);
+};
+
+const logoutUser = () => {
+  return signOut(auth);
+};
+
+const listenAuthState = (callback) => {
+  return onAuthStateChanged(auth, callback);
+};
+
 const firebaseService = {
   getAllContacts: getAllContacts,
   addContact: addContact,
@@ -61,7 +78,11 @@ const firebaseService = {
   getAllCars: getAllCars,
   addCar: addCar,
   updateCar: updateCar,
-  deleteCar: deleteCar
+  deleteCar: deleteCar,
+  loginUser: loginUser,
+  registerUser: registerUser,
+  logoutUser: logoutUser,
+  listenAuthState: listenAuthState
 };
 
 export default firebaseService;
